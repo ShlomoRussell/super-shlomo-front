@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   jwtLocalStorageKey: 'super-shlomo-token',
+  baseUrl:''
 };
 
 /*
