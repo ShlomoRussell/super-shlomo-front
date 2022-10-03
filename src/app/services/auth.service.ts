@@ -53,6 +53,6 @@ export class AuthService {
   }
 
   public checkToken(): Observable<User> {
-    return this.httpClient.get('auth/checkToken');
+    return this.httpClient.get('/auth/checkToken');
   }
 }

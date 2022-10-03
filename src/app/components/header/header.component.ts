@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
+import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Items } from 'src/app/models/item.model';
 import {
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.authService.getToken.subscribe((res) => (this.token = res));
-    if (this.token) {
+    of(this.token).subscribe((res) => {
       this.shoppingCartService
         .getShoppingCart()
         .subscribe((res) => this.shoppingCartService.setCart(res));
@@ -67,7 +68,7 @@ export class HeaderComponent implements OnInit {
         }
       });
       this.authService.getUser.subscribe((res) => (this.user = res));
-    }
+    });
     this.router.events.subscribe((event) => {
       if (event instanceof Scroll && event.routerEvent.url === '/shop') {
         this.isShopping = true;
