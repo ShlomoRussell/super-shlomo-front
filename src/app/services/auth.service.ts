@@ -9,9 +9,13 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  
-  constructor(private httpClient: HttpClient) { }
 
+  constructor(private httpClient: HttpClient) { }
+  private token = new BehaviorSubject<boolean>(false)
+  public getToken = this.token.asObservable()
+  public setToken(token: boolean) {
+    this.token.next(token)
+  }
   private user = new BehaviorSubject<User>(new User());
 
   public getUser = this.user.asObservable();
