@@ -22,7 +22,7 @@ export class JwtInterceptor implements HttpInterceptor {
     );
     if (jwtStorage) {
       _request = request.clone({
-        url: 'https://super-shlomo-api.onrender.com',
+        url: `https://super-shlomo-api.onrender.com${request.url}`,
         setHeaders: {
           Authorization: 'bearer ' + jwtStorage,
         },
