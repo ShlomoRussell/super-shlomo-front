@@ -22,13 +22,11 @@ export class JwtInterceptor implements HttpInterceptor {
     );
     if (jwtStorage) {
       _request = request.clone({
-        url: `${environment.baseUrl}${request.url}`,
         setHeaders: {
           Authorization: 'bearer ' + jwtStorage,
         },
       });
     }
-    console.log(environment.baseUrl,request?.url)
     return next.handle(_request || request);
   }
 }

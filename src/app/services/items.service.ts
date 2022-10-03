@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Items } from '../models/item.model';
 
 @Injectable({
@@ -32,17 +33,26 @@ export class ItemsService {
   }
 
   public getCategories(): Observable<string[]> {
-    return this.httpClient.get<string[]>('/api/items/categories');
+    return this.httpClient.get<string[]>(
+      `${environment.baseUrl}/api/items/categories`
+    );
   }
 
   public getAllItems(): Observable<Items[]> {
-    return this.httpClient.get<Items[]>('/api/items/allItems');
+    return this.httpClient.get<Items[]>(
+      `${environment.baseUrl}/api/items/allItems`
+    );
   }
 
   public addItem(item: FormData): Observable<Items> {
-    return this.httpClient.post<Items>('/api/items/addItem', item);
+    return this.httpClient.post<Items>(
+      `${environment.baseUrl}/api/items/addItem`,
+      item
+    );
   }
   public getItem(itemName: string): Observable<Items> {
-    return this.httpClient.get<Items>(`/api/items/${itemName}`);
+    return this.httpClient.get<Items>(
+      `${environment.baseUrl}/api/items/${itemName}`
+    );
   }
 }

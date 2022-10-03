@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import {
   CartItemMapped,
   ShoppingCart,
@@ -46,32 +47,42 @@ export class ShoppingCartService {
   }
 
   public getShoppingCart(): Observable<ShoppingCart> {
-    return this.httpClient.get<ShoppingCart>('/api/shoppingCart');
+    return this.httpClient.get<ShoppingCart>(
+      `${environment.baseUrl}/api/shoppingCart`
+    );
   }
 
   public addToCart(item: ShoppingCartItem): Observable<ShoppingCartItem> {
     return this.httpClient.put<ShoppingCartItem>(
-      '/api/shoppingCart/addToCart',
+      `${environment.baseUrl}/api/shoppingCart/addToCart`,
       item
     );
   }
 
   public deleteOneItemFromCart(itemId: string): Observable<boolean> {
-    return this.httpClient.delete<boolean>('/api/shoppingCart/oneItem', {
-      body: {
-        itemId,
-      },
-    });
+    return this.httpClient.delete<boolean>(
+      `${environment.baseUrl}/api/shoppingCart/oneItem`,
+      {
+        body: {
+          itemId,
+        },
+      }
+    );
   }
 
   public deleteAllOfItemTypeFromCart(itemId: string): Observable<boolean> {
-    return this.httpClient.delete<boolean>('/api/shoppingCart/allOfItemType', {
-      body: {
-        itemId,
-      },
-    });
+    return this.httpClient.delete<boolean>(
+      `${environment.baseUrl}/api/shoppingCart/allOfItemType`,
+      {
+        body: {
+          itemId,
+        },
+      }
+    );
   }
   public deleteCart(): Observable<boolean> {
-    return this.httpClient.delete<boolean>('/api/shoppingCart');
+    return this.httpClient.delete<boolean>(
+      `${environment.baseUrl}/api/shoppingCart`
+    );
   }
 }
