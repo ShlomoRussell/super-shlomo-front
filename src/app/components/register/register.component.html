@@ -1,0 +1,143 @@
+<form>
+  <div *ngIf="isFirstScreen">
+    <h3>Step One</h3>
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="text"
+        id="username"
+        [(ngModel)]="user.username"
+        name="username"
+        class="form-control"
+      />
+      <label class="form-label" for="username">Username</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="email"
+        id="email"
+        [(ngModel)]="user.email"
+        name="email"
+        class="form-control"
+      />
+      <label class="form-label" for="email">Email</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="email"
+        id="teudatZehut"
+        [(ngModel)]="user.teudatZehut"
+        name="teudatZehut"
+        class="form-control"
+      />
+      <label class="form-label" for="teudatZehut">Teudat Zehut</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="password"
+        id="password"
+        [(ngModel)]="user.password"
+        name="password"
+        class="form-control"
+      />
+      <label class="form-label" for="password">Password</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="password"
+        id="confirmPassword"
+        [(ngModel)]="user.confirmPassword"
+        name="confirmPassword"
+        class="form-control"
+      />
+      <label class="form-label" for="confirmPassword">Repeat password</label>
+    </div>
+
+    <button class="btn btn-primary btn-block mb-3" (click)="next()">
+      Next
+    </button>
+  </div>
+
+  <div *ngIf="isSecondScreen">
+    <h3>Step Two</h3>
+    <Button class="btn btn-primary btn-block mb-3" (click)="goBack()">Go Back</Button>
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="text"
+        id="firstName"
+        [(ngModel)]="user.firstName"
+        name="firstName"
+        class="form-control"
+      />
+      <label class="form-label" for="firstName">First Name</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="text"
+        id="lastName"
+        [(ngModel)]="user.lastName"
+        name="lastName"
+        class="form-control"
+      />
+      <label class="form-label" for="lastName">Last Name</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="text"
+        id="city"
+        [(ngModel)]="user.city"
+        name="city"
+        class="form-control"
+      />
+      <label class="form-label" for="city">City</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        required
+        type="text"
+        id="street"
+        [(ngModel)]="user.street"
+        name="street"
+        class="form-control"
+      />
+      <label class="form-label" for="street">Street</label>
+    </div>
+
+    <div class="form-check d-flex justify-content-center mb-4">
+      <input
+        required
+        class="form-check-input me-2"
+        type="checkbox"
+        value=""
+        id="registerCheck"
+        aria-describedby="registerCheckHelpText"
+      />
+      <label class="form-check-label" for="registerCheck">
+        I have read and agree to the terms
+      </label>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary btn-block mb-3"
+      (click)="register()"
+    >
+      Sign in
+    </button>
+  </div>
+  <div *ngIf="displayError">{{ displayError }}</div>
+</form>

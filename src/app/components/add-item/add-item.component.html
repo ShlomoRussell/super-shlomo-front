@@ -1,0 +1,65 @@
+<div class="tab-content">
+  <div
+    class="tab-pane fade show active"
+    id="pills-login"
+    role="tabpanel"
+    aria-labelledby="tab-login"
+  >
+    <form>
+      <div class="form-outline mb-4">
+        <input
+          id="category"
+          [(ngModel)]="newItem.category"
+          name="category"
+          class="form-control"
+         />
+          <!-- <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option> -->
+
+        <label class="form-label" for="category">Category</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="text"
+          id="loginPassword"
+          [(ngModel)]="newItem.productName"
+          name="productName"
+          class="form-control"
+        />
+        <label class="form-label" for="productName">Name</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="number"
+          id="Price"
+          [(ngModel)]="newItem.price"
+          name="Price"
+          class="form-control"
+        />
+        <label class="form-label" for="Price">Price</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="file"
+          id="Picture"
+          (change)="onFileSelected($event)"
+          name="picture"
+          class="form-control"
+        />
+        <label class="form-label" for="Picture">Picture</label>
+      </div>
+
+      <button
+        type="submit"
+        (click)="addItem()"
+        class="btn btn-primary btn-block mb-4"
+      >
+        Add Item
+      </button>
+    </form>
+  </div>
+</div>

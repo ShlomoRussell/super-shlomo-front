@@ -1,0 +1,89 @@
+<div class="card bg-primary text-white rounded-3">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5 class="mb-0">Billing and Delivery details</h5>
+    </div>
+
+    <form id="orderForm" class="mt-4">
+      <div class="form-outline form-white mb-4">
+        <input
+          required
+          name="city"
+          [(ngModel)]="order.city"
+          type="text"
+          id="city"
+          class="form-control form-control-lg"
+          siez="17"
+          placeholder="City"
+        />
+        <label class="form-label" for="city">City</label>
+      </div>
+
+      <div class="form-outline form-white mb-4">
+        <input
+          required
+          name="street"
+          [(ngModel)]="order.street"
+          type="text"
+          id="street"
+          class="form-control form-control-lg"
+          siez="17"
+          placeholder="Street"
+        />
+        <label class="form-label" for="street">Street</label>
+      </div>
+
+      <div class="form-outline form-white mb-4">
+        <input
+          required
+          name="delivey date"
+          [(ngModel)]="order.deliveryDate"
+          type="datetime-local"
+          id="deliveryDate"
+          class="form-control form-control-lg"
+          siez="17"
+        />
+        <label class="form-label" for="deliveryDate"
+          >Please choose date for delivery</label
+        >
+      </div>
+
+      <div class="form-outline form-white mb-4">
+        <input
+          required
+          name="ccdigits"
+          [(ngModel)]="order.lastFourDigitsOfCC"
+          type="text"
+          id="cc"
+          class="form-control form-control-lg"
+          siez="17"
+          placeholder="1234 5678 9012 3457"
+          minlength="19"
+          maxlength="19"
+        />
+        <label class="form-label" for="cc">Card Number</label>
+      </div>
+    </form>
+
+    <hr class="my-4" />
+
+    <div class="d-flex justify-content-between">
+      <p class="mb-2">Subtotal</p>
+      <p class="mb-2">&#x20AA;{{ subTotal }}</p>
+    </div>
+
+    <div class="d-flex justify-content-between mb-4">
+      <p class="mb-2">Total(Incl. taxes)</p>
+      <p class="mb-2">&#x20AA;{{ total }}</p>
+    </div>
+
+    <button
+     (click)="sendOrder()"
+      type="submit"
+      form="orderForm"
+      class="btn btn-info btn-block btn-lg"
+    >
+      Checkout
+    </button>
+  </div>
+</div>

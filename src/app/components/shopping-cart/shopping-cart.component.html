@@ -1,0 +1,61 @@
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">Shopping Cart</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body" style="background-color: #eee">
+    <div *ngIf="cartItems.length === 0" class="text-center">
+      <p>Your cart is currently empty</p>
+      <button class="btn btn-primary" (click)="offcanvas.close()">
+        Continue Shopping
+      </button>
+    </div>
+    <app-cart-item
+      *ngFor="let cartItem of cartItems"
+      [cartItem]="cartItem"
+      class="card mb-3"
+    ></app-cart-item>
+  </div>
+  <footer class="position-relative p-3 pb-2" style="background-color: #eee">
+    <div class="d-flex justify-content-between sticky-bottom">
+      <h5>Total: &#x20AA;{{ total }}</h5>
+      <a
+        class="btn btn-primary"
+        [ngClass]="{ disabled: cartItems.length === 0 }"
+        (click)="offcanvas.close()"
+        routerLink="/order"
+        >Proceed To Checkout</a
+      >
+    </div>
+  </footer>
+</ng-template>
+<div class="m-2 pb-2 position-relative">
+  <span
+    style="z-index: 1"
+    class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-success"
+    >{{ cartItems.length }}</span
+  >
+  <button
+    [disabled]="offCanvasIsDisabled"
+    class="border-0 btn btn-info"
+    (click)="openScroll(content)"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-cart"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+      />
+    </svg>
+  </button>
+</div>

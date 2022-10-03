@@ -1,0 +1,13 @@
+div.card {
+  width: 10rem;
+}
+
+@media (max-width: 800px) {
+  div.card {
+    width:16.6rem;
+  }
+}
+
+button.border-0:hover:enabled{
+  background-color: #c6c7c8;
+}

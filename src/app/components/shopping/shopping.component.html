@@ -1,0 +1,15 @@
+<div class="container text-center">
+  <app-categories></app-categories>
+  <div *ngIf="items" class="container">
+    <div class="row">
+      <app-item
+        class="col col-xs-1 mb-3 "
+        *ngFor="let currentItem of items"
+        [item]="currentItem"
+      ></app-item>
+    </div>
+  </div>
+  <div *ngIf="items.length === 0" class="tranlate-center">
+    No products found! Please try again!
+  </div>
+</div>
