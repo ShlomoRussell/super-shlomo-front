@@ -22,7 +22,11 @@
   </div>
   <div class="modal-body">
     <div class="d-flex flex-row align-items-between">
-      <img class="img-fluid w-50" [src]="'/images/' + item.picture" alt="..." />
+      <img
+        class="img-fluid w-50"
+        [src]="baseUrl + '/images/' + item.picture"
+        alt="..."
+      />
       <div class="d-flex flex-row align-items-between">
         <div class="m-1 text-center">
           <h6>Quantity</h6>
