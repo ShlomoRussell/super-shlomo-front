@@ -4,6 +4,7 @@ import {
   ShoppingCartItem,
 } from 'src/app/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart-item',
@@ -15,6 +16,7 @@ export class CartItemComponent implements OnInit {
   cartItem!: CartItemMapped;
   @Input()
   isOrder: boolean = false;
+  public baseUrl = environment.baseUrl;
   public cartItemsMappedArray!: CartItemMapped[];
   public cartItemsArray!: ShoppingCartItem[];
   constructor(private shoppingCartService: ShoppingCartService) {}
@@ -67,7 +69,7 @@ export class CartItemComponent implements OnInit {
   }
 
   public subtractOneItem(item: ShoppingCartItem) {
-       this.shoppingCartService
+    this.shoppingCartService
       .deleteOneItemFromCart(item.itemId!)
       .subscribe((res) => {
         if (res) {

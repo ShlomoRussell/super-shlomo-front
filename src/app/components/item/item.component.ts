@@ -6,6 +6,7 @@ import {
   ShoppingCartItem,
 } from 'src/app/models/shoppingCart.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item',
@@ -17,6 +18,7 @@ export class ItemComponent implements OnInit {
   item!: Items;
   public shoppingCartItem = new ShoppingCartItem();
   public currentCartItems: CartItemMapped[] = [];
+  public baseUrl = environment.baseUrl;
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
