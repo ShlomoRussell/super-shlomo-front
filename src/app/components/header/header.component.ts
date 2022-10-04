@@ -34,40 +34,45 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getToken.subscribe((res) => (this.token = res));
     of(this.token).subscribe((res) => {
-      this.shoppingCartService
-        .getShoppingCart()
-        .subscribe((res) => this.shoppingCartService.setCart(res));
-      this.shoppingCartService
-        .getShoppingCart()
-        .subscribe((res) => (this.cartItems = res.items));
-      this.itemsService
-        .getAllItems()
-        .pipe(tap((res) => this.itemsService._items.next(res)))
-        .subscribe((res) => this.itemsService.setItems(res));
-      this.itemsService.get_items.subscribe((res) => {
-        if (this.cartItems.length > 0) {
-          this.shoppingCartService.setCartItemsMapped(
-            res
-              .filter(
-                (item) =>
-                  item.id ===
-                  this.cartItems.find((_item) => _item.itemId === item.id)
-                    ?.itemId
-              )
-              .reduce(
-                (newArr: CartItemMapped[], curr) => [
-                  ...newArr,
-                  {
-                    ...this.cartItems.find((_item) => _item.itemId === curr.id),
-                    ...curr,
-                  },
-                ],
-                []
-              )
-          );
-        }
-      });
-      this.authService.getUser.subscribe((res) => (this.user = res));
+      {
+        if (res)
+          this.shoppingCartService
+            .getShoppingCart()
+            .subscribe((res) => this.shoppingCartService.setCart(res));
+        this.shoppingCartService
+          .getShoppingCart()
+          .subscribe((res) => (this.cartItems = res.items));
+        this.itemsService
+          .getAllItems()
+          .pipe(tap((res) => this.itemsService._items.next(res)))
+          .subscribe((res) => this.itemsService.setItems(res));
+        this.itemsService.get_items.subscribe((res) => {
+          if (this.cartItems.length > 0) {
+            this.shoppingCartService.setCartItemsMapped(
+              res
+                .filter(
+                  (item) =>
+                    item.id ===
+                    this.cartItems.find((_item) => _item.itemId === item.id)
+                      ?.itemId
+                )
+                .reduce(
+                  (newArr: CartItemMapped[], curr) => [
+                    ...newArr,
+                    {
+                      ...this.cartItems.find(
+                        (_item) => _item.itemId === curr.id
+                      ),
+                      ...curr,
+                    },
+                  ],
+                  []
+                )
+            );
+          }
+        });
+        this.authService.getUser.subscribe((res) => (this.user = res));
+      }
     });
     this.router.events.subscribe((event) => {
       if (event instanceof Scroll && event.routerEvent.url === '/shop') {
