@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void { }
-  
+
   public goBack() {
     this.isFirstScreen = !this.isFirstScreen;
     this.isSecondScreen = !this.isSecondScreen;
@@ -45,6 +45,6 @@ export class RegisterComponent implements OnInit {
           )
         )
       )
-      .subscribe((res) => this.router.navigate(['/login']));
+      .subscribe((res) => this.router.navigate(['/']));
   }
 }
