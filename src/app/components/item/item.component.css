@@ -4,10 +4,10 @@ div.card {
 
 @media (max-width: 800px) {
   div.card {
-    width:16.6rem;
+    width: 100%;
   }
 }
 
-button.border-0:hover:enabled{
+button.border-0:hover:enabled {
   background-color: #c6c7c8;
 }
