@@ -30,9 +30,9 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingCartService.getCartItemsMapped.subscribe((res) => {
-      
+
       this.cartItems = res;
- 
+
       this.subTotal = this.cartItems.reduce(
         (prev, curr) => (Number(curr.totalPrice!) + Number(prev)).toFixed(2),
         '0'
@@ -42,7 +42,7 @@ export class OrderComponent implements OnInit {
         Number(this.subTotal) * 0.17
       ).toFixed(2);
       this.shoppingCartService.getCart.subscribe((res) => {
-       
+       console.log(res)
         this.order.cartId = res.id;
         this.order.customerId = res.customerId;
       });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
-import { of } from 'rxjs';
+import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Items } from 'src/app/models/item.model';
 import {
@@ -30,24 +30,34 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private itemsService: ItemsService,
     private shoppingCartService: ShoppingCartService
-  ) {}
+  ) { }
   ngOnInit(): void {
-    this.authService.getToken.subscribe((res) => (this.token = res));
-    of(this.token).subscribe((res) => {
-      {
-        if (res)
-          this.shoppingCartService
-            .getShoppingCart()
-            .subscribe((res) => this.shoppingCartService.setCart(res));
+    this.authService.getUser.subscribe((res) => {
+      this.user = res
+      if (res.token) {
+        this.authService.setToken(true)
+      }
+    });
+
+    this.authService.getToken.subscribe((res) => {
+      this.token = res
+
+      if (res) {
         this.shoppingCartService
           .getShoppingCart()
-          .subscribe((res) => (this.cartItems = res.items));
+          .subscribe((res) => {
+            this.shoppingCartService.setCart(res)
+            this.cartItems = res.items
+          });
+
         this.itemsService
           .getAllItems()
           .pipe(tap((res) => this.itemsService._items.next(res)))
           .subscribe((res) => this.itemsService.setItems(res));
+
         this.itemsService.get_items.subscribe((res) => {
           if (this.cartItems.length > 0) {
+            // mapping the cartItems together with the items so the pictures and data are together
             this.shoppingCartService.setCartItemsMapped(
               res
                 .filter(
@@ -71,9 +81,9 @@ export class HeaderComponent implements OnInit {
             );
           }
         });
-        this.authService.getUser.subscribe((res) => (this.user = res));
       }
     });
+    // check if on shopping pagge in order to add the search bar or not
     this.router.events.subscribe((event) => {
       if (event instanceof Scroll && event.routerEvent.url === '/shop') {
         this.isShopping = true;
@@ -82,10 +92,12 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
   public onChangeSearch(event: Event) {
     const target = event.target as HTMLInputElement;
     this.itemsService.searchItems(target.value);
   }
+
   public logOut() {
     this.authService.logOut();
   }
