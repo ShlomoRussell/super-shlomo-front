@@ -51,6 +51,7 @@ export class AuthService {
   public logOut() {
     localStorage.removeItem(environment.jwtLocalStorageKey);
     this.user.next(new User());
+    this.setToken(false)
     this.isLoggedIn.next(false);
   }
   public register(credentials: User): Observable<User> {
