@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   public user!: User;
   public isShopping = false;
   private items!: Items[];
-  private token = false;
+  public token = false;
   private cartItems: ShoppingCartItem[] = [];
   constructor(
     private authService: AuthService,

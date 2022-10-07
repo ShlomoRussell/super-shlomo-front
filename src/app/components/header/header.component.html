@@ -25,7 +25,7 @@
               [routerLinkActiveOptions]="{ exact: true }"
               aria-current="page"
               routerLink="/"
-              >Home</a
+              ><img src="/images/logo.png" alt="logo" class="img-fluid"></a
             >
           </li>
           <li *ngIf="user.role === 'Admin'" class="nav-item">
@@ -36,7 +36,7 @@
               >Add Item</a
             >
           </li>
-          <li class="nav-item">
+          <li *ngIf="token" class="nav-item">
             <a class="nav-link" href="#" (click)="logOut()">Logout</a>
           </li>
         </ul>
