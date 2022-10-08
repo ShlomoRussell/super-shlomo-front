@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   private items!: Items[];
   public token = false;
   private cartItems: ShoppingCartItem[] = [];
+  public baseUrl = environment.baseUrl;
   constructor(
     private authService: AuthService,
     private router: Router,
