@@ -21,14 +21,16 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLinkActive="active-link"
-              [routerLinkActiveOptions]="{ exact: true }"
               aria-current="page"
               routerLink="/"
-              ><img src="/images/logo.png" alt="logo" class="img-fluid"></a
-            >
+              ><img
+                src="/images/logo.png"
+                alt="logo"
+                style="width: 2.5rem"
+                class="img-fluid"
+            /></a>
           </li>
-          <li *ngIf="user.role === 'Admin'" class="nav-item">
+          <li *ngIf="user.role === 'Admin'" class="nav-item my-2">
             <a
               class="nav-link"
               routerLinkActive="active-link"
@@ -36,13 +38,16 @@
               >Add Item</a
             >
           </li>
-          <li *ngIf="token" class="nav-item">
+          <li *ngIf="token" class="nav-item my-2">
             <a class="nav-link" href="#" (click)="logOut()">Logout</a>
           </li>
         </ul>
         <app-shopping-cart></app-shopping-cart>
-        <div>
-          Welcome <span *ngIf="!user.username">Guest</span>{{ user.username }}
+        <div style="height: 1.5rem;">
+          <span class="my-2">
+            Welcome <span *ngIf="!user.username">Guest</span
+            >{{ user.username }}</span
+          >
         </div>
       </div>
     </div>
