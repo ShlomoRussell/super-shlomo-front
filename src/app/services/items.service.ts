@@ -15,7 +15,7 @@ export class ItemsService {
   }
   public _items = new BehaviorSubject<Items[]>([]);
   public get_items = this._items.asObservable();
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public filterCategories(category: string) {
     if (category === 'All') return this.setItems(this._items.value);
@@ -50,9 +50,10 @@ export class ItemsService {
       item
     );
   }
-  public getItem(itemName: string): Observable<Items> {
-    return this.httpClient.get<Items>(
-      `${environment.baseUrl}/api/items/${itemName}`
-    );
+
+  public editItem(item: Items): Observable<Items> {
+    return this.httpClient.put<Items>(`${environment.baseUrl}/api/items/editItem`, item)
   }
+
+
 }
