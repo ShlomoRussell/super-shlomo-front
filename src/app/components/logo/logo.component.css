@@ -1,0 +1,7 @@
+div.h-100 {
+  background-image: url('/assets/supermarket.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}

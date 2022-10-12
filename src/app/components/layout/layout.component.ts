@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LayoutComponent implements OnInit {
   public isLoggedIn = false;
-
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
