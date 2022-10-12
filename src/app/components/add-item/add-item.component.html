@@ -8,12 +8,13 @@
     <form>
       <div class="form-outline mb-4">
         <input
+          required
           id="category"
           [(ngModel)]="newItem.category"
           name="category"
           class="form-control"
-         />
-          <!-- <option *ngFor="let category of categories" [value]="category">
+        />
+        <!-- <option *ngFor="let category of categories" [value]="category">
             {{ category }}
           </option> -->
 
@@ -22,6 +23,7 @@
 
       <div class="form-outline mb-4">
         <input
+          required
           type="text"
           id="loginPassword"
           [(ngModel)]="newItem.productName"
@@ -33,6 +35,7 @@
 
       <div class="form-outline mb-4">
         <input
+          required
           type="number"
           id="Price"
           [(ngModel)]="newItem.price"
@@ -44,6 +47,7 @@
 
       <div class="form-outline mb-4">
         <input
+          required
           type="file"
           id="Picture"
           (change)="onFileSelected($event)"
