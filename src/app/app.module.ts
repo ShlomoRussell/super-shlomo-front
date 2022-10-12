@@ -24,6 +24,9 @@ import { OrderComponent } from './components/order/order.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { OrderLayoutComponent } from './components/order-layout/order-layout.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { ItemModalComponent } from './components/item-modal/item-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { OrderSuccessComponent } from './components/order-success/order-success.
     CartItemComponent,
     OrderLayoutComponent,
     OrderSuccessComponent,
+    LogoComponent,
+    EditItemComponent,
+    ItemModalComponent,
   ],
   imports: [
     BrowserModule,

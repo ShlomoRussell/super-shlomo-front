@@ -1,0 +1,76 @@
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ item.productName }}</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+    (click)="closeModal('cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-row align-items-between">
+      <img
+        class="img-fluid w-50"
+        [src]="baseUrl + '/images/' + item.picture"
+        [alt]="item.productName + 'pic'"
+      />
+      <div class="d-flex flex-row align-items-between">
+        <div class="m-1 text-center">
+          <h6>Quantity</h6>
+          <button class="border-0" (click)="addQuantity()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              fill="currentColor"
+              class="bi bi-caret-up-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+              />
+            </svg>
+          </button>
+          <div
+            class="border border-dark text-center mx-auto"
+            style="width: 25px; height: 25px"
+          >
+            {{ shoppingCartItem.quantity }}
+          </div>
+          <button
+            class="border-0"
+            [disabled]="shoppingCartItem.quantity === 1"
+            (click)="subtractQuantity()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              fill="currentColor"
+              class="bi bi-caret-down-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="m-1 text-center">
+          <h6>Price</h6>
+          <div class="p-1 text-nowrap">&#x20AA;{{ item.price }}</div>
+        </div>
+        <div class="m-1 text-center">
+          <h6>Total</h6>
+          <div class="p-1 text-nowrap">
+            &#x20AA;{{ shoppingCartItem.totalPrice }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addToCart()">
+      Save
+    </button>
+  </div>
