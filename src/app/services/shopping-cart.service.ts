@@ -80,6 +80,11 @@ export class ShoppingCartService {
       }
     );
   }
+
+  public newCart(): Observable<ShoppingCart>{
+    return this.httpClient.get<ShoppingCart>(`${environment.baseUrl}/api/shoppingCart/newCart`)
+  }
+  
   public deleteCart(): Observable<boolean> {
     return this.httpClient.delete<boolean>(
       `${environment.baseUrl}/api/shoppingCart`
