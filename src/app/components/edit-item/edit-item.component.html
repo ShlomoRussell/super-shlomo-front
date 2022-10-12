@@ -1,0 +1,74 @@
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">Shopping Cart</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body" style="background-color: #eee">
+    <form>
+      <div class="form-outline mb-4">
+        <input
+          id="category"
+          [(ngModel)]="editedItem.category"
+          name="category"
+          class="form-control"
+          [placeholder]="item.category"
+        />
+        <!-- <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option> -->
+
+        <label class="form-label" for="category">Category</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="text"
+          id="loginPassword"
+          [(ngModel)]="editedItem.productName"
+          name="productName"
+          class="form-control"
+          [placeholder]="item.productName"
+        />
+        <label class="form-label" for="productName">Name</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="number"
+          id="Price"
+          [(ngModel)]="editedItem.price"
+          name="Price"
+          class="form-control"
+          [placeholder]="item.price"
+        />
+        <label class="form-label" for="Price">Price</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          type="file"
+          id="Picture"
+          (change)="onFileSelected($event)"
+          name="picture"
+          class="form-control"
+        />
+        <label class="form-label" for="Picture">Picture</label>
+      </div>
+
+      <button
+        type="submit"
+        (click)="editItem()"
+        class="btn btn-primary btn-block mb-4"
+      >
+        Edit Item
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="openOffcanvas(content)">Edit</button>
