@@ -6,10 +6,15 @@
     aria-labelledby="tab-login"
   >
     <form>
-      <!-- Email input -->
+      <ngb-alert *ngIf="error" type="warning" (closed)="closeErrorAlert()">{{
+        error | titlecase
+      }}</ngb-alert>
+
+      <!-- Usename input -->
+
       <div class="form-outline mb-4">
         <input
-        required
+          required
           type="text"
           id="loginName"
           [(ngModel)]="credentials.username"
@@ -22,7 +27,7 @@
       <!-- Password input -->
       <div class="form-outline mb-4">
         <input
-        required
+          required
           type="password"
           id="loginPassword"
           [(ngModel)]="credentials.password"

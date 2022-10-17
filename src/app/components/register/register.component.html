@@ -1,4 +1,8 @@
 <form>
+  <ngb-alert *ngIf="displayError" type="warning" (closed)="closeErrorAlert()">{{
+    displayError | titlecase
+  }}</ngb-alert>
+
   <div *ngIf="isFirstScreen">
     <h3>Step One</h3>
     <div class="form-outline mb-4">
@@ -61,17 +65,26 @@
       <label class="form-label" for="confirmPassword">Repeat password</label>
     </div>
 
-    <button class="btn btn-primary btn-block mb-3" (click)="next()">
+    <button
+      type="submit"
+      class="btn btn-primary btn-block mb-3"
+      (click)="onNextClick()"
+    >
       Next
     </button>
   </div>
 
   <div *ngIf="isSecondScreen">
     <h3>Step Two</h3>
-    <Button class="btn btn-primary btn-block mb-3" (click)="goBack()">Go Back</Button>
+    <Button
+      type="button"
+      class="btn btn-primary btn-block mb-3"
+      (click)="goBack()"
+      >Go Back</Button
+    >
     <div class="form-outline mb-4">
       <input
-        required
+        ngRequired
         type="text"
         id="firstName"
         [(ngModel)]="user.firstName"
@@ -83,7 +96,7 @@
 
     <div class="form-outline mb-4">
       <input
-        required
+        ngRequired
         type="text"
         id="lastName"
         [(ngModel)]="user.lastName"
@@ -95,7 +108,7 @@
 
     <div class="form-outline mb-4">
       <input
-        required
+        ngRequired
         type="text"
         id="city"
         [(ngModel)]="user.city"
@@ -107,7 +120,7 @@
 
     <div class="form-outline mb-4">
       <input
-        required
+        ngRequired
         type="text"
         id="street"
         [(ngModel)]="user.street"
@@ -119,7 +132,7 @@
 
     <div class="form-check d-flex justify-content-center mb-4">
       <input
-        required
+        ngRequired
         class="form-check-input me-2"
         type="checkbox"
         value=""
@@ -130,14 +143,14 @@
         I have read and agree to the terms
       </label>
     </div>
-
-    <button
-      type="submit"
-      class="btn btn-primary btn-block mb-3"
-      (click)="register()"
-    >
-      Sign in
-    </button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button
+        type="submit"
+        class="btn btn-primary btn-block mb-3"
+        (click)="register()"
+      >
+        Sign in
+      </button>
+    </div>
   </div>
-  <div *ngIf="displayError">{{ displayError }}</div>
 </form>

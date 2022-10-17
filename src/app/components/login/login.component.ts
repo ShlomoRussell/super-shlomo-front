@@ -12,9 +12,10 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
   public credentials = new LoginCredentials();
-  constructor(private auth: AuthService, private router: Router) {}
+  public error!: string
+  constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public login(): void {
     this.auth
@@ -27,10 +28,19 @@ export class LoginComponent implements OnInit {
           )
         )
       )
-      .subscribe((res) => {
-        this.router.navigate(['/']);
-        this.auth.setLoggedIn()
-        this.auth.setUser(res)
+      .subscribe({
+        next: (res) => {
+          this.router.navigate(['/']);
+          this.auth.setLoggedIn()
+          this.auth.setUser(res)
+        }, error: (err) => {
+          if (err.status === 404) {
+            this.error = err.error
+          }
+        },
       });
+  }
+  public closeErrorAlert() {
+    this.error = ''
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   public isFirstScreen = true;
   public isSecondScreen = false;
   public displayError!: string;
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -23,18 +24,21 @@ export class RegisterComponent implements OnInit {
     this.isFirstScreen = !this.isFirstScreen;
     this.isSecondScreen = !this.isSecondScreen;
   }
-  public next() {
+  public onNextClick() {
     this.auth.checkIfTeudatZehutExists(this.user.teudatZehut!).subscribe({
       next: (res) => {
         this.isSecondScreen = res;
         this.isFirstScreen = !res;
       },
       error: (error) => {
-        if (error.status === 409) this.displayError = error.error;
+        if (error.status === 409) {
+          this.displayError = error.error;
+        }
       },
     });
   }
   public register(): void {
+
     this.auth
       .register(this.user)
       .pipe(
@@ -45,6 +49,17 @@ export class RegisterComponent implements OnInit {
           )
         )
       )
-      .subscribe((res) => this.router.navigate(['/']));
+      .subscribe({
+        next: (res) => this.router.navigate(['/']),
+        error: (err) => {
+          if (err.status !== 500) {
+            this.displayError = err.error
+          }
+        }
+      });
+  }
+
+  public closeErrorAlert() {
+    this.displayError = ''
   }
 }

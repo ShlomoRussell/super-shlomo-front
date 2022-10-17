@@ -11,7 +11,6 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +24,6 @@ export class HeaderComponent implements OnInit {
   private items!: Items[];
   public token = false;
   private cartItems: ShoppingCartItem[] = [];
-  public baseUrl = environment.baseUrl;
   constructor(
     private authService: AuthService,
     private router: Router,
