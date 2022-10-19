@@ -9,12 +9,15 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
   ngOnInit(): void {
-    this.authService
+    const result = this.authService
       .checkToken()
       .subscribe({
-        next: (res) => this.authService.setUser(res),
-        error(err) {},
-      }).unsubscribe();
+        next: (res) => {
+          this.authService.setUser(res)
+          result.unsubscribe();
+        },
+        error(err) { },
+      })
   }
   title = 'client';
 }

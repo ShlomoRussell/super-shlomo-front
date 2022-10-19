@@ -56,10 +56,13 @@ export class OrderComponent implements OnInit {
       modal.componentInstance.order = this.order;
       modal.componentInstance.cartItems = this.cartItems;
       this.shoppingCartService.newCart().subscribe((res) => {
-        this.shoppingCartService
+        const order = this.shoppingCartService
           .getShoppingCart()
-          .subscribe((res) => this.shoppingCartService.setCart(res))
-          .unsubscribe();
+          .subscribe((res) => {
+            this.shoppingCartService.setCart(res)
+            order.unsubscribe()
+          }
+          )
         this.shoppingCartService.setCartItemsMapped([]);
       });
     });
