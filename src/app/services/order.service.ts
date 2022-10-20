@@ -8,12 +8,20 @@ import OrderModel from '../models/order.model';
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public checkout(order: OrderModel): Observable<OrderModel> {
     return this.httpClient.post<OrderModel>(
       `${environment.baseUrl}/api/order`,
       order
     );
+  }
+
+  public getLatestOrder(): Observable<OrderModel> {
+    return this.httpClient.get<OrderModel>(`${environment.baseUrl}/api/order/lastPurchase`)
+  }
+
+  public getCountOfOrders(): Observable<number> {
+    return this.httpClient.get<number>(`${environment.baseUrl}/api/order/count`)
   }
 }
