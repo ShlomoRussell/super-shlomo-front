@@ -1,4 +1,17 @@
-<div class="text-center h-100">
-
-    <Button class="btn btn-primary btn-block mb-3" (click)="startShopping()">Start Shopping</Button>
+<div class="d-flex align-items-center h-50 justify-content-center h-100">
+  <div>
+    <p>Available product in our store - {{ numberOfItemsAvailable }}</p>
+    <p>Number of orders submitted in our store - {{ numberOfOrdersPlaced }}</p>
+    <div class="pb-1" *ngIf="isLoggedIn">
+      <span class="text-warning"> Notifications: </span>
+      <p *ngIf="openCart > today && cartIsEmpty">
+        You have a cart open from
+        {{ openCart | date: "EEEE, MMMM d, y, h:mm a" }}
+      </p>
+      <p>
+        Your last purschase was on
+        {{ dateOfLastPurchase | date: "EEEE, MMMM d, y, h:mm a" }}
+      </p>
+    </div>
+  </div>
 </div>
