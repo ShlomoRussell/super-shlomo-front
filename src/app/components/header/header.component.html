@@ -42,8 +42,8 @@
         <app-shopping-cart *ngIf="user.role === 'Customer'"></app-shopping-cart>
         <div style="height: 1.5rem">
           <span class="my-2">
-            Welcome <span *ngIf="!user.username">Guest</span
-            >{{ user.username }}</span
+            Hello <span *ngIf="!user.username">Guest</span
+            >{{ user.username | titlecase}}</span
           >
         </div>
       </div>
