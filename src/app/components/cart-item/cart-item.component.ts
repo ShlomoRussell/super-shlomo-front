@@ -19,11 +19,15 @@ export class CartItemComponent implements OnInit {
   public baseUrl = environment.baseUrl;
   public cartItemsMappedArray!: CartItemMapped[];
   public cartItemsArray!: ShoppingCartItem[];
-  constructor(private shoppingCartService: ShoppingCartService) {}
+  public cartId!: string;
+  constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.shoppingCartService.getCart.subscribe(
-      (res) => (this.cartItemsArray = res.items)
+      (res) => {
+        this.cartItemsArray = res.items
+        this.cartId = res.id!
+      }
     );
     this.shoppingCartService.getCartItemsMapped.subscribe(
       (res) => (this.cartItemsMappedArray = res)
@@ -47,7 +51,7 @@ export class CartItemComponent implements OnInit {
   }
 
   public addOneItem(item: ShoppingCartItem) {
-    this.shoppingCartService.addToCart(item).subscribe((res) => {
+    this.shoppingCartService.addToCart(item, this.cartId).subscribe((res) => {
       this.shoppingCartService.setCartItems(item);
       this.shoppingCartService.setCartItemsMapped(
         this.cartItemsMappedArray.map(this.addMapCb, this)
@@ -70,7 +74,7 @@ export class CartItemComponent implements OnInit {
 
   public subtractOneItem(item: ShoppingCartItem) {
     this.shoppingCartService
-      .deleteOneItemFromCart(item.itemId!)
+      .deleteOneItemFromCart(item.itemId!, this.cartId)
       .subscribe((res) => {
         if (res) {
           this.shoppingCartService.setCartItems(
@@ -85,9 +89,9 @@ export class CartItemComponent implements OnInit {
       });
   }
 
-  public deleteAllOfItemType(itemId: string) {
+  public deleteAllOfItemType(itemId: string,) {
     this.shoppingCartService
-      .deleteAllOfItemTypeFromCart(itemId)
+      .deleteAllOfItemTypeFromCart(itemId, this.cartId)
       .subscribe((res) => {
         if (res) {
           this.shoppingCartService.setCartItemsMapped(

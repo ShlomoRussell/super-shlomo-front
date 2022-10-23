@@ -20,11 +20,11 @@ export class ShoppingCartComponent implements OnInit {
     private shoppingCartService: ShoppingCartService,
     private offcanvasService: NgbOffcanvas,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.shoppingCartService
-      .getShoppingCart()
+      .getCart
       .subscribe((res) => (this.cart = res));
     this.shoppingCartService.getCartItemsMapped.subscribe((res) => {
       this.cartItems = res;

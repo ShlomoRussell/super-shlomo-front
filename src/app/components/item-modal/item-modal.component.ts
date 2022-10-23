@@ -14,7 +14,7 @@ export class ItemModalComponent implements OnInit {
   public baseUrl = environment.baseUrl;
   public shoppingCartItem = new ShoppingCartItem();
   public currentCartItems: CartItemMapped[] = [];
-
+  public cartId!: string
   @Input()
   item!: Items
   constructor(
@@ -25,7 +25,7 @@ export class ItemModalComponent implements OnInit {
   ngOnInit(): void {
     this.shoppingCartItem.quantity = 1;
     this.shoppingCartItem.totalPrice = this.item.price;
-
+    this.shoppingCartService.getCart.subscribe(res => this.cartId = res.id!)
     this.shoppingCartService.getCartItemsMapped.subscribe(
       (res) => (this.currentCartItems = res)
     );
@@ -60,7 +60,7 @@ export class ItemModalComponent implements OnInit {
     this.shoppingCartItem.itemId = this.item.id;
     this.activeModal.dismiss();
     this.shoppingCartService
-      .addToCart(this.shoppingCartItem)
+      .addToCart(this.shoppingCartItem, this.cartId)
       .subscribe((res) => {
         this.shoppingCartService.setCartItems(res);
         const index = this.currentCartItems.findIndex(

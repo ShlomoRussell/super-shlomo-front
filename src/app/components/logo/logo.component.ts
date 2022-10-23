@@ -9,10 +9,10 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 })
 export class LogoComponent implements OnInit {
   public isNewCart!: boolean;
-  constructor(private router:Router,private shoppingCartService:ShoppingCartService) { }
+  constructor(private router: Router, private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
-    this.shoppingCartService.getCart.subscribe(res=>this.isNewCart=!res.items.length)
+    this.shoppingCartService.getCart.subscribe(res => this.isNewCart = !res.items.length)
   }
 
   public startShopping() {

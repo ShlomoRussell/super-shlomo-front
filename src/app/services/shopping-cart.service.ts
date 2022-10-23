@@ -12,7 +12,7 @@ import {
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
   private cart = new BehaviorSubject<ShoppingCart>(new ShoppingCart([]));
   public getCart = this.cart.asObservable();
   public setCart(newCart: ShoppingCart) {
@@ -52,39 +52,41 @@ export class ShoppingCartService {
     );
   }
 
-  public addToCart(item: ShoppingCartItem): Observable<ShoppingCartItem> {
+  public addToCart(item: ShoppingCartItem, cartId: string): Observable<ShoppingCartItem> {
     return this.httpClient.put<ShoppingCartItem>(
       `${environment.baseUrl}/api/shoppingCart/addToCart`,
-      item
+      { item, cartId }
     );
   }
 
-  public deleteOneItemFromCart(itemId: string): Observable<boolean> {
+  public deleteOneItemFromCart(itemId: string, cartId: string): Observable<boolean> {
     return this.httpClient.delete<boolean>(
       `${environment.baseUrl}/api/shoppingCart/oneItem`,
       {
         body: {
           itemId,
+          cartId
         },
       }
     );
   }
 
-  public deleteAllOfItemTypeFromCart(itemId: string): Observable<boolean> {
+  public deleteAllOfItemTypeFromCart(itemId: string, cartId: string): Observable<boolean> {
     return this.httpClient.delete<boolean>(
       `${environment.baseUrl}/api/shoppingCart/allOfItemType`,
       {
         body: {
           itemId,
+          cartId
         },
       }
     );
   }
 
-  public newCart(): Observable<ShoppingCart>{
+  public newCart(): Observable<ShoppingCart> {
     return this.httpClient.get<ShoppingCart>(`${environment.baseUrl}/api/shoppingCart/newCart`)
   }
-  
+
   public deleteCart(): Observable<boolean> {
     return this.httpClient.delete<boolean>(
       `${environment.baseUrl}/api/shoppingCart`
